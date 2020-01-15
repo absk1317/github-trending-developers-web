@@ -1,19 +1,19 @@
-.App {
+.Trends {
   text-align: center;
 }
 
-.App-logo {
+.Trends-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .Trends-logo {
+    animation: Trends-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
+.Trends-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -24,11 +24,11 @@
   color: white;
 }
 
-.App-link {
+.Trends-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@keyframes Trends-logo-spin {
   from {
     transform: rotate(0deg);
   }
