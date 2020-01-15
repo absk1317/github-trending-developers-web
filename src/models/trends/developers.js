@@ -1,6 +1,6 @@
 export function errored(state = false, action) {
   switch (action.type) {
-    case 'ERRORED':
+    case 'DEV_ERRORED':
       return action.errored;
     default:
       return state;
@@ -8,7 +8,7 @@ export function errored(state = false, action) {
 }
 export function isLoading(state = false, action) {
   switch (action.type) {
-    case 'LOADING':
+    case 'DEV_LOADING':
       return action.isLoading;
     default:
       return state;
@@ -16,7 +16,7 @@ export function isLoading(state = false, action) {
 }
 export function data(state = [], action) {
   switch (action.type) {
-    case 'FETCH_DATA_SUCCESS':
+    case 'DEV_FETCH_DATA_SUCCESS':
       return action.data;
     default:
       return state;

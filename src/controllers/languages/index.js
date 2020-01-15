@@ -2,24 +2,37 @@ import axios from '../api.js';
 
 function errored(bool) {
   return {
-    type: 'DEV_ERRORED',
+    type: 'LANGUAGES_ERRORED',
     errored: bool,
   };
 }
 function isLoading(bool) {
   return {
-    type: 'DEV_LOADING',
+    type: 'LANGUAGES_LOADING',
     isLoading: bool,
   };
 }
+
 function FetchDataSuccess(data) {
   return {
-    type: 'DEV_FETCH_DATA_SUCCESS',
+    type: 'LANGUAGES_FETCH_DATA_SUCCESS',
     data,
   };
 }
+function setCurrentLanguage(language) {
+  return {
+    type: 'SET_CURRENT_LANGUAGE',
+    language,
+  };
+}
 
-export function fetchData(url, params = {}) {
+export function setLanguage(language) {
+  return dispatch => {
+    dispatch(setCurrentLanguage(language));
+  };
+}
+
+export function fetchLanguages(url, params = {}) {
   return dispatch => {
     dispatch(isLoading(true));
     return axios

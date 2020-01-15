@@ -3,6 +3,7 @@ import './index.css';
 
 import { connect } from 'react-redux';
 import { fetchData } from '../../controllers/trends/developers';
+import { fetchLanguages, setLanguage } from '../../controllers/languages';
 
 import { Card, Container, ListGroup, Row, Col, Button } from 'react-bootstrap';
 
@@ -10,16 +11,17 @@ class Trends extends React.Component {
   componentDidMount() {
     this.props.fetchData(
       // 'https://github-trending-api.now.sh/developers?language=javascript&since=weekly',
-      'http://localhost:3001/api/v1/trends/developers?language=javascript&since=monthly',
+      'http://localhost:3001/api/v1/trends/developers?language=javascript&since=weekly',
     );
+
+    this.props.fetchLanguages('http://localhost:3001/api/v1/languages');
   }
 
   renderContent() {
-    const { isLoading, data, errored } = this.props;
+    const { isLoading, data, errored, languages } = this.props;
     if (isLoading) return <h3>Loading...</h3>;
     if (errored) return <h3>Some Error Occurred. Please retry...</h3>;
 
-    console.log(data[0]);
     return data.map((developer, index) => {
       return (
         <Card style={{ width: '18rem', padding: 20 }} key={index}>
@@ -85,12 +87,15 @@ const mapStateToProps = state => {
     data: state.developers.data,
     errored: state.developers.errored,
     isLoading: state.developers.isLoading,
+    languages: state.languages.data,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: url => dispatch(fetchData(url)),
+    fetchLanguages: url => dispatch(fetchLanguages(url)),
+    setLanguage: language => dispatch(setLanguage(language)),
   };
 };
 
