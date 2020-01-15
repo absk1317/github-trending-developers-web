@@ -18,7 +18,7 @@ function isLoading(state = false, action) {
   }
 }
 
-function current(state = {}, action) {
+function currentLanguage(state = {}, action) {
   switch (action.type) {
     case 'SET_CURRENT_LANGUAGE':
       return action.language;
@@ -27,7 +27,16 @@ function current(state = {}, action) {
   }
 }
 
-function data(state = [], action) {
+function trendingPeriod(state = { value: 'daily', label: 'Daily' }, action) {
+  switch (action.type) {
+    case 'SET_CURRENT_TRENDING_PERIOD':
+      return action.trendingPeriod;
+    default:
+      return state;
+  }
+}
+
+function languages(state = [], action) {
   switch (action.type) {
     case 'LANGUAGES_FETCH_DATA_SUCCESS':
       return action.data.map(item => {
@@ -37,10 +46,25 @@ function data(state = [], action) {
       return state;
   }
 }
+function trendingPeriods(
+  state = [
+    { value: 'daily', label: 'Daily' },
+    { value: 'weekly', label: 'Weekly' },
+    { value: 'monthly', label: 'Monthly' },
+  ],
+  action,
+) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
 
 export default combineReducers({
-  data,
+  languages,
   errored,
   isLoading,
-  current,
+  currentLanguage,
+  trendingPeriod,
+  trendingPeriods,
 });

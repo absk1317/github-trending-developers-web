@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import developers from './trends';
-import languages from './languages';
+import filters from './filters';
 
 export default combineReducers({
   developers,
-  languages,
+  filters,
 });

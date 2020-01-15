@@ -4,7 +4,11 @@ import Select from 'react-select';
 
 import { connect } from 'react-redux';
 import { fetchData } from '../../controllers/trends/developers';
-import { fetchLanguages, setLanguage } from '../../controllers/languages';
+import {
+  fetchLanguages,
+  setLanguage,
+  setTrendingPeriod,
+} from '../../controllers/filters';
 
 import { Card, Container, ListGroup, Row, Col, Button } from 'react-bootstrap';
 
@@ -13,6 +17,7 @@ class Trends extends React.Component {
     super(props);
     this.refreshData = this.refreshData.bind(this);
     this.languageChange = this.languageChange.bind(this);
+    this.trendingPeriodChange = this.trendingPeriodChange.bind(this);
   }
   componentDidMount() {
     this.refreshData();
@@ -22,7 +27,7 @@ class Trends extends React.Component {
   refreshData() {
     let params = {
       language: this.props.language.value,
-      trending_period: 'weekly',
+      since: this.props.trendingPeriod.value,
     };
     this.props.fetchData(
       'http://localhost:3001/api/v1/trends/developers',
@@ -32,6 +37,11 @@ class Trends extends React.Component {
 
   async languageChange(language) {
     await this.props.setLanguage(language);
+    this.refreshData();
+  }
+
+  async trendingPeriodChange(trendingPeriod) {
+    await this.props.setTrendingPeriod(trendingPeriod);
     this.refreshData();
   }
 
@@ -89,7 +99,7 @@ class Trends extends React.Component {
   }
 
   render() {
-    console.log('adsf', this.props.language);
+    console.log(this.props.trendingPeriods);
     return (
       <>
         <div className="Header">
@@ -99,6 +109,11 @@ class Trends extends React.Component {
           options={this.props.languages}
           value={this.props.language}
           onChange={this.languageChange}
+        />
+        <Select
+          options={this.props.trendingPeriods}
+          value={this.props.trendingPeriod}
+          onChange={this.trendingPeriodChange}
         />
         <div className="Trends">{this.renderContent()}</div>
       </>
@@ -111,8 +126,10 @@ const mapStateToProps = state => {
     data: state.developers.data,
     errored: state.developers.errored,
     isLoading: state.developers.isLoading,
-    languages: state.languages.data,
-    language: state.languages.current,
+    languages: state.filters.languages,
+    language: state.filters.currentLanguage,
+    trendingPeriod: state.filters.trendingPeriod,
+    trendingPeriods: state.filters.trendingPeriods,
   };
 };
 
@@ -121,6 +138,8 @@ const mapDispatchToProps = dispatch => {
     fetchData: (url, params) => dispatch(fetchData(url, params)),
     fetchLanguages: url => dispatch(fetchLanguages(url)),
     setLanguage: language => dispatch(setLanguage(language)),
+    setTrendingPeriod: trendingPeriod =>
+      dispatch(setTrendingPeriod(trendingPeriod)),
   };
 };
 

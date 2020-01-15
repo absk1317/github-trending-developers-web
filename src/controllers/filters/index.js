@@ -25,10 +25,22 @@ function setCurrentLanguage(language) {
     language,
   };
 }
+function setCurrentTrendingPeriod(trendingPeriod) {
+  return {
+    type: 'SET_CURRENT_TRENDING_PERIOD',
+    trendingPeriod,
+  };
+}
 
 export function setLanguage(language) {
   return dispatch => {
     dispatch(setCurrentLanguage(language));
+  };
+}
+
+export function setTrendingPeriod(trendingPeriod) {
+  return dispatch => {
+    dispatch(setCurrentTrendingPeriod(trendingPeriod));
   };
 }
 
