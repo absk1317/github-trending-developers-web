@@ -4,34 +4,72 @@ import './index.css';
 import { connect } from 'react-redux';
 import { fetchData } from '../../controllers/trends/developers';
 
+import { Card, Container, ListGroup, Row, Col, Button } from 'react-bootstrap';
+
 class Trends extends React.Component {
   componentDidMount() {
     this.props.fetchData(
       // 'https://github-trending-api.now.sh/developers?language=javascript&since=weekly',
-      'http://localhost:3001/api/v1/trends/developers?language=javascript&since=weekly',
+      'http://localhost:3001/api/v1/trends/developers?language=javascript&since=monthly',
     );
   }
 
+  renderContent() {
+    const { isLoading, data, errored } = this.props;
+    if (isLoading) return <h3>Loading...</h3>;
+    if (errored) return <h3>Some Error Occurred. Please retry...</h3>;
+
+    console.log(data[0]);
+    return data.map((developer, index) => {
+      return (
+        <a
+          href={developer.url}
+          key={index}
+          target="_blank"
+          style={{ textDecoration: 'none' }}
+          rel="noopener noreferrer"
+        >
+          <Card style={{ width: '18rem', padding: 20 }} key={index}>
+            <Card.Img
+              src={developer.avatar}
+              style={{ width: '200px', height: '200px' }}
+              key={index}
+            />
+            <Card body className="DeveloperDetails">
+              <Card.Title style={{ marginBottom: 20 }}>
+                {developer.name}
+                <span className="username"> ({developer.username})</span>
+                {developer.type != 'user' && (
+                  <span className="username"> ({developer.type})</span>
+                )}
+              </Card.Title>
+
+              <ListGroup.Item>
+                Repo:
+                <Card body style={{ marginLeft: 25 }}>
+                  <ListGroup.Item>{developer.repo.name}</ListGroup.Item>
+                  <ListGroup.Item>
+                    {developer.repo.description.trim()}
+                  </ListGroup.Item>
+                  <ListGroup.Item>Link: {developer.repo.url}</ListGroup.Item>
+                  <Button variant="primary">Go somewhere</Button>
+                </Card>
+              </ListGroup.Item>
+            </Card>
+          </Card>
+        </a>
+      );
+    });
+  }
+
   render() {
-    console.log('data', this.props.data);
-    console.log('isLoading', this.props.isLoading);
-    console.log('errored', this.props.errored);
     return (
-      <div className="Trends">
-        <header className="Trends-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="Trends-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+        <div className="Header">
+          <h2>Developer Trends</h2>
+        </div>
+        <div className="Trends">{this.renderContent()}</div>
+      </>
     );
   }
 }
