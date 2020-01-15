@@ -23,12 +23,16 @@ export function fetchData(url, params = {}) {
   return dispatch => {
     dispatch(isLoading(true));
     return axios
-      .get(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+      .get(
+        url,
+        { params },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
         },
-      })
+      )
       .then(response => {
         dispatch(isLoading(false));
         dispatch(FetchDataSuccess(response.data));

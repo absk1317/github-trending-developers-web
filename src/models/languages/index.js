@@ -18,7 +18,7 @@ function isLoading(state = false, action) {
   }
 }
 
-function current(state = 'ruby', action) {
+function current(state = {}, action) {
   switch (action.type) {
     case 'SET_CURRENT_LANGUAGE':
       return action.language;
@@ -30,7 +30,9 @@ function current(state = 'ruby', action) {
 function data(state = [], action) {
   switch (action.type) {
     case 'LANGUAGES_FETCH_DATA_SUCCESS':
-      return action.data;
+      return action.data.map(item => {
+        return { value: item.code, label: item.name };
+      });
     default:
       return state;
   }

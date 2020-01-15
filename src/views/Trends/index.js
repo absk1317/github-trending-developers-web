@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import Select from 'react-select';
 
 import { connect } from 'react-redux';
 import { fetchData } from '../../controllers/trends/developers';
@@ -8,13 +9,30 @@ import { fetchLanguages, setLanguage } from '../../controllers/languages';
 import { Card, Container, ListGroup, Row, Col, Button } from 'react-bootstrap';
 
 class Trends extends React.Component {
+  constructor(props) {
+    super(props);
+    this.refreshData = this.refreshData.bind(this);
+    this.languageChange = this.languageChange.bind(this);
+  }
   componentDidMount() {
-    this.props.fetchData(
-      // 'https://github-trending-api.now.sh/developers?language=javascript&since=weekly',
-      'http://localhost:3001/api/v1/trends/developers?language=javascript&since=weekly',
-    );
-
+    this.refreshData();
     this.props.fetchLanguages('http://localhost:3001/api/v1/languages');
+  }
+
+  refreshData() {
+    let params = {
+      language: this.props.language.value,
+      trending_period: 'weekly',
+    };
+    this.props.fetchData(
+      'http://localhost:3001/api/v1/trends/developers',
+      params,
+    );
+  }
+
+  async languageChange(language) {
+    await this.props.setLanguage(language);
+    this.refreshData();
   }
 
   renderContent() {
@@ -71,11 +89,17 @@ class Trends extends React.Component {
   }
 
   render() {
+    console.log('adsf', this.props.language);
     return (
       <>
         <div className="Header">
           <h2>Developer Trends</h2>
         </div>
+        <Select
+          options={this.props.languages}
+          value={this.props.language}
+          onChange={this.languageChange}
+        />
         <div className="Trends">{this.renderContent()}</div>
       </>
     );
@@ -88,12 +112,13 @@ const mapStateToProps = state => {
     errored: state.developers.errored,
     isLoading: state.developers.isLoading,
     languages: state.languages.data,
+    language: state.languages.current,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: url => dispatch(fetchData(url)),
+    fetchData: (url, params) => dispatch(fetchData(url, params)),
     fetchLanguages: url => dispatch(fetchLanguages(url)),
     setLanguage: language => dispatch(setLanguage(language)),
   };
