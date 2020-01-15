@@ -47,8 +47,25 @@ class Trends extends React.Component {
 
   renderContent() {
     const { isLoading, data, errored, languages } = this.props;
-    if (isLoading) return <h3>Loading...</h3>;
-    if (errored) return <h3>Some Error Occurred. Please retry...</h3>;
+    if (isLoading)
+      return (
+        <Container style={{ flex: 'auto' }}>
+          <h3>Loading...</h3>
+        </Container>
+      );
+    if (errored)
+      return (
+        <Container style={{ flex: 'auto' }}>
+          <h3>Some Error Occurred. Please retry...</h3>
+        </Container>
+      );
+
+    if (data.length === 0)
+      return (
+        <Container style={{ flex: 'auto' }}>
+          <h3>No trending users in this section</h3>
+        </Container>
+      );
 
     return data.map((developer, index) => {
       return (
@@ -100,21 +117,32 @@ class Trends extends React.Component {
 
   render() {
     console.log(this.props.trendingPeriods);
+    let selectedLanguage = this.props.language;
+    if (!selectedLanguage.value) selectedLanguage = null;
     return (
       <>
         <div className="Header">
           <h2>Developer Trends</h2>
         </div>
-        <Select
-          options={this.props.languages}
-          value={this.props.language}
-          onChange={this.languageChange}
-        />
-        <Select
-          options={this.props.trendingPeriods}
-          value={this.props.trendingPeriod}
-          onChange={this.trendingPeriodChange}
-        />
+        <Row style={{ display: 'flex' }}>
+          <Col style={{ width: '49%' }}>
+            <Select
+              options={this.props.languages}
+              value={selectedLanguage}
+              onChange={this.languageChange}
+              placeholder={'Select any language'}
+            />
+          </Col>
+          <Col className="Header" style={{ width: '2%' }}></Col>
+          <Col style={{ width: '49%' }}>
+            <Select
+              options={this.props.trendingPeriods}
+              value={this.props.trendingPeriod}
+              onChange={this.trendingPeriodChange}
+            />
+          </Col>
+        </Row>
+
         <div className="Trends">{this.renderContent()}</div>
       </>
     );
