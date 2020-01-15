@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api.js';
 
 export function errored(bool) {
   return {
@@ -23,12 +23,20 @@ export function fetchData(url, params = {}) {
   return dispatch => {
     dispatch(isLoading(true));
     return axios
-      .get(url)
+      .get(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
       .then(response => {
         dispatch(isLoading(false));
         dispatch(FetchDataSuccess(response.data));
         return response.data;
       })
-      .catch(() => dispatch(errored(true)));
+      .catch(res => {
+        dispatch(errored(true));
+        dispatch(isLoading(false));
+      });
   };
 }

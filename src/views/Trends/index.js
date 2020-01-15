@@ -5,15 +5,17 @@ import { connect } from 'react-redux';
 import { fetchData } from '../../controllers/trends/developers';
 
 class Trends extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    console.log(this.props.isLoading);
+    this.props.fetchData(
+      // 'https://github-trending-api.now.sh/developers?language=javascript&since=weekly',
+      'http://localhost:3001/api/v1/trends/developers?language=javascript&since=weekly',
+    );
   }
 
   render() {
+    console.log('data', this.props.data);
+    console.log('isLoading', this.props.isLoading);
+    console.log('errored', this.props.errored);
     return (
       <div className="Trends">
         <header className="Trends-header">
