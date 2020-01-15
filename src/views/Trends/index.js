@@ -22,42 +22,48 @@ class Trends extends React.Component {
     console.log(data[0]);
     return data.map((developer, index) => {
       return (
-        <a
-          href={developer.url}
-          key={index}
-          target="_blank"
-          style={{ textDecoration: 'none' }}
-          rel="noopener noreferrer"
-        >
-          <Card style={{ width: '18rem', padding: 20 }} key={index}>
+        <Card style={{ width: '18rem', padding: 20 }} key={index}>
+          <a
+            href={developer.url}
+            key={index}
+            target="_blank"
+            style={{ textDecoration: 'none' }}
+            rel="noopener noreferrer"
+          >
             <Card.Img
               src={developer.avatar}
               style={{ width: '200px', height: '200px' }}
               key={index}
             />
-            <Card body className="DeveloperDetails">
-              <Card.Title style={{ marginBottom: 20 }}>
-                {developer.name}
-                <span className="username"> ({developer.username})</span>
-                {developer.type != 'user' && (
-                  <span className="username"> ({developer.type})</span>
-                )}
-              </Card.Title>
+          </a>
+          <Card body className="DeveloperDetails">
+            <Card.Title style={{ marginBottom: 20, textAlign: 'center' }}>
+              {developer.name}
+              <span className="username"> ({developer.username})</span>
+              {developer.type != 'user' && (
+                <span className="username"> ({developer.type})</span>
+              )}
+            </Card.Title>
 
-              <ListGroup.Item>
-                Repo:
-                <Card body style={{ marginLeft: 25 }}>
-                  <ListGroup.Item>{developer.repo.name}</ListGroup.Item>
-                  <ListGroup.Item>
-                    {developer.repo.description.trim()}
-                  </ListGroup.Item>
-                  <ListGroup.Item>Link: {developer.repo.url}</ListGroup.Item>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card>
-              </ListGroup.Item>
-            </Card>
+            <ListGroup.Item>
+              <Card body style={{ textAlign: 'center' }}>
+                <Button variant="primary" size="lg" className="RepoLink">
+                  <a
+                    href={developer.repo.url}
+                    target="_blank"
+                    style={{ textDecoration: 'none' }}
+                    rel="noopener noreferrer"
+                  >
+                    {developer.repo.name}
+                  </a>
+                </Button>
+                <ListGroup.Item className="RepoDescription">
+                  {developer.repo.description.trim()}
+                </ListGroup.Item>
+              </Card>
+            </ListGroup.Item>
           </Card>
-        </a>
+        </Card>
       );
     });
   }
