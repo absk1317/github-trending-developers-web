@@ -5,17 +5,13 @@ import { fetchData } from '../../controllers';
 
 import { Container } from 'react-bootstrap';
 
-import { TRENDING_DEVELOPERS_API, en } from '../../utils';
+import { en } from '../../utils';
 
 import DeveloperCard from './Card';
 
 class List extends React.Component {
   componentDidMount() {
-    const { currentLanguage, currentTrendingPeriod, fetchData } = this.props,
-      language = currentLanguage.value,
-      since = currentTrendingPeriod.value;
-
-    fetchData(TRENDING_DEVELOPERS_API, { language, since });
+    this.props.fetchData();
   }
 
   render() {
@@ -49,7 +45,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: (url, params) => dispatch(fetchData(url, params)),
+    fetchData: () => dispatch(fetchData()),
   };
 };
 

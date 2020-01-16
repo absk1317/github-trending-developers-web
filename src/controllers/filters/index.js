@@ -1,67 +1,33 @@
 import axios from '../api.js';
-
-function errored(bool) {
-  return {
-    type: 'LANGUAGES_ERRORED',
-    errored: bool,
-  };
-}
-function isLoading(bool) {
-  return {
-    type: 'LANGUAGES_LOADING',
-    isLoading: bool,
-  };
-}
+import { LANGUAGES_FETCH_API } from '../../utils';
 
 function FetchDataSuccess(data) {
-  return {
-    type: 'LANGUAGES_FETCH_DATA_SUCCESS',
-    data,
-  };
+  return { type: 'LANGUAGES_FETCH_DATA_SUCCESS', data };
 }
+
 function setCurrentLanguage(language) {
-  return {
-    type: 'SET_CURRENT_LANGUAGE',
-    language,
-  };
+  return { type: 'SET_CURRENT_LANGUAGE', language };
 }
 function setCurrentTrendingPeriod(trendingPeriod) {
-  return {
-    type: 'SET_CURRENT_TRENDING_PERIOD',
-    trendingPeriod,
-  };
+  return { type: 'SET_CURRENT_TRENDING_PERIOD', trendingPeriod };
 }
 
 export function setLanguage(language) {
-  return dispatch => {
-    dispatch(setCurrentLanguage(language));
-  };
+  return dispatch => dispatch(setCurrentLanguage(language));
 }
 
 export function setTrendingPeriod(trendingPeriod) {
-  return dispatch => {
-    dispatch(setCurrentTrendingPeriod(trendingPeriod));
-  };
+  return dispatch => dispatch(setCurrentTrendingPeriod(trendingPeriod));
 }
 
-export function fetchLanguages(url, params = {}) {
+export function fetchLanguages() {
   return dispatch => {
-    dispatch(isLoading(true));
     return axios
-      .get(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
+      .get(LANGUAGES_FETCH_API)
       .then(response => {
-        dispatch(isLoading(false));
         dispatch(FetchDataSuccess(response.data));
         return response.data;
       })
-      .catch(res => {
-        dispatch(errored(true));
-        dispatch(isLoading(false));
-      });
+      .catch(res => {});
   };
 }

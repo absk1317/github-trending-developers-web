@@ -5,25 +5,16 @@ import { connect } from 'react-redux';
 import { fetchLanguages, setLanguage, setTrendingPeriod, fetchData } from '../../controllers';
 
 import { Row, Col } from 'react-bootstrap';
-import { LANGUAGES_FETCH_API, TRENDING_DEVELOPERS_API } from '../../utils';
 
 class Trends extends React.Component {
   componentDidMount() {
-    this.props.fetchLanguages(LANGUAGES_FETCH_API);
+    this.props.fetchLanguages();
   }
 
   changeFilter = async (filter, value) => {
     await this.props[filter](value);
-    this.refreshData();
+    this.props.fetchData();
   };
-
-  refreshData() {
-    const { currentLanguage, currentTrendingPeriod, fetchData } = this.props,
-      language = currentLanguage.value,
-      since = currentTrendingPeriod.value;
-
-    fetchData(TRENDING_DEVELOPERS_API, { language, since });
-  }
 
   renderSelect(options, value, filter) {
     const styles = { width: '20%', padding: '0.1%', backgroundColor: '#282c34' };
@@ -65,7 +56,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: (url, params) => dispatch(fetchData(url, params)),
+    fetchData: () => dispatch(fetchData()),
     fetchLanguages: url => dispatch(fetchLanguages(url)),
     setLanguage: language => dispatch(setLanguage(language)),
     setTrendingPeriod: trend => dispatch(setTrendingPeriod(trend)),
