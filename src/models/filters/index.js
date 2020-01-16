@@ -18,7 +18,9 @@ function isLoading(state = false, action) {
   }
 }
 
-function currentLanguage(state = {}, action) {
+const initialLanguages = [{ value: null, label: 'Select any Language' }];
+
+function currentLanguage(state = initialLanguages[0], action) {
   switch (action.type) {
     case 'SET_CURRENT_LANGUAGE':
       return action.language;
@@ -36,12 +38,15 @@ function trendingPeriod(state = { value: 'daily', label: 'Daily' }, action) {
   }
 }
 
-function languages(state = [], action) {
+function languages(state = initialLanguages, action) {
   switch (action.type) {
     case 'LANGUAGES_FETCH_DATA_SUCCESS':
-      return action.data.map(item => {
-        return { value: item.code, label: item.name };
-      });
+      return [
+        ...initialLanguages,
+        ...action.data.map(item => {
+          return { value: item.code, label: item.name };
+        }),
+      ];
     default:
       return state;
   }
