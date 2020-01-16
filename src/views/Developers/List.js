@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'react-bootstrap';
+import DeveloperCard from './Card';
 import { en } from '../../utils';
 import { fetchData } from '../../controllers';
-import DeveloperCard from './Card';
 
 class List extends React.Component {
   componentDidMount() {

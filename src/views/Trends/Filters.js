@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { fetchLanguages, setLanguage, setTrendingPeriod, fetchData } from '../../controllers';
+import './index.css';
 
 class Trends extends React.Component {
   componentDidMount() {
@@ -15,12 +16,9 @@ class Trends extends React.Component {
   };
 
   renderSelect(options, value, filter) {
-    const styles = { width: '20%', padding: '0.1%', backgroundColor: '#282c34' },
-      onChange = value => this.changeFilter(filter, value);
-
     return (
-      <Col style={styles}>
-        <Select options={options} value={value} onChange={onChange} />
+      <Col className="FilterWrapper">
+        <Select options={options} value={value} onChange={val => this.changeFilter(filter, val)} />
       </Col>
     );
   }
@@ -33,7 +31,7 @@ class Trends extends React.Component {
         <Col className="Header" style={{ width: '80%' }}></Col>
         {this.renderSelect(languages, currentLanguage, 'setLanguage')}
         {this.renderSelect(trends, currentTrendingPeriod, 'setTrendingPeriod')}
-        <Col className="Header" style={{ width: '8%' }}></Col>
+        <Col className="Header" style={{ width: '10%' }}></Col>
       </Row>
     );
   }

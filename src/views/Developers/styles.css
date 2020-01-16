@@ -1,0 +1,57 @@
+.CardContainer {
+  width: 500px;
+  height: 600px;
+  padding: 20px;
+}
+
+.DeveloperDetails {
+  color: white;
+  text-align: justify;
+  padding-left: 25px;
+}
+
+.DeveloperDetailsTitle {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.RepoDetails {
+  text-align: center;
+}
+
+.ProfileIcon {
+  width: 400px;
+  height: 400px;
+}
+
+.Username {
+  font-size: small;
+}
+
+.RepoLink {
+  padding: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  width: auto;
+  height: auto;
+  font-family: Sans-Serif;
+  background-color: white;
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+  /* text-transform: uppercase; */
+  transition: background-color 0.5s ease, color 1s ease;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.RepoLink:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+.RepoLink:active{
+  border: 10px dotted;
+}
+
+.RepoDescription {
+  font-size: 16px;
+}
