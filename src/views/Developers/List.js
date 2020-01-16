@@ -1,12 +1,8 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
-import { fetchData } from '../../controllers';
-
 import { Container } from 'react-bootstrap';
-
 import { en } from '../../utils';
-
+import { fetchData } from '../../controllers';
 import DeveloperCard from './Card';
 
 class List extends React.Component {
@@ -15,17 +11,15 @@ class List extends React.Component {
   }
 
   render() {
-    const { data, text } = this.props;
-
-    if (text) {
+    if (this.props.text) {
       return (
         <Container style={{ flex: 'auto' }}>
-          <h3>{text}</h3>
+          <h3>{this.props.text}</h3>
         </Container>
       );
     }
 
-    return data.map((developer, index) => {
+    return this.props.data.map((developer, index) => {
       return <DeveloperCard key={index} developer={developer} />;
     });
   }

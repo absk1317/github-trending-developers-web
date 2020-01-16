@@ -1,10 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
-
 import { connect } from 'react-redux';
-import { fetchLanguages, setLanguage, setTrendingPeriod, fetchData } from '../../controllers';
-
 import { Row, Col } from 'react-bootstrap';
+import { fetchLanguages, setLanguage, setTrendingPeriod, fetchData } from '../../controllers';
 
 class Trends extends React.Component {
   componentDidMount() {
@@ -17,15 +15,12 @@ class Trends extends React.Component {
   };
 
   renderSelect(options, value, filter) {
-    const styles = { width: '20%', padding: '0.1%', backgroundColor: '#282c34' };
+    const styles = { width: '20%', padding: '0.1%', backgroundColor: '#282c34' },
+      onChange = value => this.changeFilter(filter, value);
 
     return (
       <Col style={styles}>
-        <Select
-          options={options}
-          value={value}
-          onChange={value => this.changeFilter(filter, value)}
-        />
+        <Select options={options} value={value} onChange={onChange} />
       </Col>
     );
   }
@@ -57,7 +52,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: () => dispatch(fetchData()),
-    fetchLanguages: url => dispatch(fetchLanguages(url)),
+    fetchLanguages: () => dispatch(fetchLanguages()),
     setLanguage: language => dispatch(setLanguage(language)),
     setTrendingPeriod: trend => dispatch(setTrendingPeriod(trend)),
   };
