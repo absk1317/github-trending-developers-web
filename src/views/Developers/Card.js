@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, ListGroup, Button } from 'react-bootstrap';
 
-export default class DeveloperCard extends React.Component {
+export default class extends React.Component {
   render() {
     const { developer } = this.props;
     return (
@@ -12,18 +12,13 @@ export default class DeveloperCard extends React.Component {
           style={{ textDecoration: 'none' }}
           rel="noopener noreferrer"
         >
-          <Card.Img
-            src={developer.avatar}
-            style={{ width: '200px', height: '200px' }}
-          />
+          <Card.Img src={developer.avatar} style={{ width: '200px', height: '200px' }} />
         </a>
         <Card body className="DeveloperDetails">
           <Card.Title style={{ marginBottom: 20, textAlign: 'center' }}>
             {developer.name}
             <span className="username"> ({developer.username})</span>
-            {developer.type != 'user' && (
-              <span className="username"> ({developer.type})</span>
-            )}
+            {developer.type !== 'user' && <span className="username"> ({developer.type})</span>}
           </Card.Title>
 
           <ListGroup.Item>

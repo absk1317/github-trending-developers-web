@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import Developers from './Developers';
+import DevelopersList from '../Developers/';
 import Filters from './Filters';
 import { Container } from 'react-bootstrap';
 
@@ -13,7 +13,7 @@ export default class Trends extends React.Component {
         </div>
         <Filters />
         <div className="Trends">
-          <Developers />
+          <DevelopersList />
         </div>
       </Container>
     );
