@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeveloperCard Component Matches the snapshot 1`] = `
+<div
+  className="CardContainer card"
+>
+  <a
+    href="some url"
+    rel="noopener noreferrer"
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }
+    target="_blank"
+  >
+    <img
+      className="card-img ProfileIcon"
+      src="some avatar"
+    />
+  </a>
+  <div
+    className="DeveloperDetails card"
+  >
+    <div
+      className="card-body"
+    >
+      <div
+        className="DeveloperDetailsTitle card-title h5"
+      >
+        Some Name
+        <span
+          className="Username"
+        >
+           (
+          SomeUserName
+          )
+        </span>
+        <span
+          className="Username"
+        >
+           (
+          User
+          )
+        </span>
+      </div>
+      <div
+        className="list-group-item"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <div
+          className="RepoDetails card"
+        >
+          <div
+            className="card-body"
+          >
+            <button
+              className="RepoLink btn btn-primary"
+              disabled={false}
+              type="button"
+            >
+              <a
+                href="RepoURL"
+                rel="noopener noreferrer"
+                style={
+                  Object {
+                    "textDecoration": "none",
+                  }
+                }
+                target="_blank"
+              >
+                RepoName
+              </a>
+            </button>
+            <div
+              className="RepoDescription list-group-item"
+              disabled={false}
+              onClick={[Function]}
+            >
+              Repo Description
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
