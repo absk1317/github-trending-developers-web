@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link Component Matches the snapshot 1`] = `
+<a
+  href="some url"
+  rel="noopener noreferrer"
+  style={
+    Object {
+      "textDecoration": "none",
+    }
+  }
+  target="_blank"
+/>
+`;

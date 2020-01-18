@@ -7,8 +7,8 @@ function errored(bool) {
 function isLoading(bool) {
   return { type: 'DEV_LOADING', isLoading: bool };
 }
-function FetchDataSuccess(data) {
-  return { type: 'DEV_FETCH_DATA_SUCCESS', data };
+function FetchDataSuccess({ data, language, since }) {
+  return { type: 'DEV_FETCH_DATA_SUCCESS', data, language, since };
 }
 
 export function fetchData() {
@@ -22,7 +22,7 @@ export function fetchData() {
       .get(TRENDING_DEVELOPERS_API, { params: { language, since } })
       .then(response => {
         dispatch(isLoading(false));
-        dispatch(FetchDataSuccess(response.data));
+        dispatch(FetchDataSuccess({ data: response.data, language: currentLanguage.label, since }));
         return response.data;
       })
       .catch(res => {

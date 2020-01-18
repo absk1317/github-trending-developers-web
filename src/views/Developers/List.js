@@ -11,10 +11,10 @@ class List extends React.Component {
   }
 
   render() {
-    if (this.props.text) {
+    if (this.props.alert) {
       return (
         <Container style={{ flex: 'auto' }}>
-          <h3>{this.props.text}</h3>
+          <h3>{this.props.alert}</h3>
         </Container>
       );
     }
@@ -26,15 +26,10 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { data, errored, isLoading } = state.developers,
+  const { data, errored, isLoading, alert } = state.developers,
     { currentLanguage, trendingPeriod: currentTrendingPeriod } = state.filters;
-  let text = null;
 
-  if (data.length === 0) text = en.noData;
-  if (isLoading) text = en.loading;
-  if (errored) text = en.errored;
-
-  return { data, errored, isLoading, currentLanguage, currentTrendingPeriod, text };
+  return { data, errored, isLoading, currentLanguage, currentTrendingPeriod, alert };
 };
 
 const mapDispatchToProps = dispatch => {
