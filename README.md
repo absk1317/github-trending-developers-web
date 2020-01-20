@@ -1,14 +1,19 @@
 This project renders trending developers in any coding language in three different periods, namely daily, weekly and monthly.
 
-The Project is written with help of React 16.12.0, and Redux 4
+#### The Project is written with help of React 16.12.0, and Redux 4
 
-There is no concept of local state anywhere, and redux has been utilized to its fullest.
+#### There is no concept of local state anywhere, and redux has been utilized to its fullest.
 
-Have used locales file for easy localization, if desired.
+#### Have used locales file for easy localization, if desired.
 
-Styles are put up in separate files, in the same heirarchy as the component file, we haven't used inline styles anywhere.
+#### Styles are put up in separate files, in the same heirarchy as the component file, we haven't used inline styles anywhere.
 
-All requests to port 3001 with /api have been proxied, and won't be handled by react.
+#### All requests to port 3001 with /api have been proxied, and won't be handled by react.
+
+#### We have used MVC patter for meeting our requirements.
+  Reducers are models,
+  Actions are controller actions, and,
+  Views as views
 
 
 ## Available Scripts
