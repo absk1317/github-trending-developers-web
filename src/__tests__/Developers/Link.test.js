@@ -15,6 +15,7 @@ const developer = {
   },
 };
 
+// specs for Link Component for matching the snapshot
 describe('Link Component', () => {
   test('Matches the snapshot', () => {
     const link = create(<Link href={developer.url} />);

@@ -1,3 +1,4 @@
+// locales for easy localization
 export const en = (params = {}) => {
   return {
     loading: 'Loading...',

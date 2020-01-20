@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 
 const initialLanguages = [{ value: null, label: 'Select any Language' }];
 
+// all languages
 function languages(state = initialLanguages, action) {
   switch (action.type) {
     case 'LANGUAGES_FETCH_DATA_SUCCESS':
+      // API returns data as [{code, label}, ...]
       return [
         ...initialLanguages,
         ...action.data.map(item => {
@@ -16,6 +18,7 @@ function languages(state = initialLanguages, action) {
   }
 }
 
+// current language out of all
 function currentLanguage(state = initialLanguages[0], action) {
   switch (action.type) {
     case 'SET_CURRENT_LANGUAGE':
@@ -25,6 +28,7 @@ function currentLanguage(state = initialLanguages[0], action) {
   }
 }
 
+// all trending periods
 function trendingPeriods() {
   return [
     { value: 'daily', label: 'Daily' },
@@ -33,6 +37,7 @@ function trendingPeriods() {
   ];
 }
 
+// current trend out of all
 function trendingPeriod(state = trendingPeriods()[0], action) {
   switch (action.type) {
     case 'SET_CURRENT_TRENDING_PERIOD':

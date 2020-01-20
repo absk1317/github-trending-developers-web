@@ -17,6 +17,16 @@ export default ({ developer }) => {
   );
 };
 
+const DeveloperDetails = ({ developer }) => {
+  return (
+    <Card.Title className="DeveloperDetailsTitle">
+      {developer.name}
+      <span className="Username"> ({developer.username})</span>
+      {developer.type !== 'user' && <span className="Username"> ({developer.type})</span>}
+    </Card.Title>
+  );
+};
+
 const RepoDetails = ({ repo }) => {
   return (
     <ListGroup.Item>
@@ -27,15 +37,5 @@ const RepoDetails = ({ repo }) => {
         <ListGroup.Item className="RepoDescription">{repo.description.trim()}</ListGroup.Item>
       </Card>
     </ListGroup.Item>
-  );
-};
-
-const DeveloperDetails = ({ developer }) => {
-  return (
-    <Card.Title className="DeveloperDetailsTitle">
-      {developer.name}
-      <span className="Username"> ({developer.username})</span>
-      {developer.type !== 'user' && <span className="Username"> ({developer.type})</span>}
-    </Card.Title>
   );
 };

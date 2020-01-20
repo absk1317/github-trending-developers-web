@@ -15,6 +15,7 @@ const developer = {
   },
 };
 
+// specs for Card Component for matching the snapshot
 describe('DeveloperCard Component', () => {
   test('Matches the snapshot', () => {
     const card = create(<DeveloperCard developer={developer} />);

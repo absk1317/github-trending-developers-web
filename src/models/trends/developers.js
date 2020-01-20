@@ -1,5 +1,7 @@
+// for easy localization, put data in single place
 import { en } from '../../utils';
 
+// has the API errored or not
 export function errored(state = false, action) {
   switch (action.type) {
     case 'DEV_ERRORED':
@@ -8,6 +10,8 @@ export function errored(state = false, action) {
       return state;
   }
 }
+
+// is the API loading, or finished
 export function isLoading(state = false, action) {
   switch (action.type) {
     case 'DEV_LOADING':
@@ -17,6 +21,7 @@ export function isLoading(state = false, action) {
   }
 }
 
+// data
 export function data(state = [], action) {
   switch (action.type) {
     case 'DEV_FETCH_DATA_SUCCESS':
@@ -26,6 +31,7 @@ export function data(state = [], action) {
   }
 }
 
+// alert text to display. If this is there, data shouldn't be there
 export function alert(state = null, action) {
   switch (action.type) {
     case 'DEV_FETCH_DATA_SUCCESS':

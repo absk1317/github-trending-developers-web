@@ -1,3 +1,4 @@
+// Axios Interceptor, common data can be put here
 import Axios from 'axios';
 
 export default Axios.create({

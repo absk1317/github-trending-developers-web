@@ -47,6 +47,7 @@ const initialState = {
   },
 };
 
+// Provided that there is no trending dev with given filters
 describe('List Component', () => {
   test('Matches the snapshot with text', () => {
     const store = mockStore(initialState);
@@ -59,6 +60,7 @@ describe('List Component', () => {
   });
 });
 
+// Provided that the data is loading
 describe('List Component', () => {
   test('Matches the snapshot loading', () => {
     const store = mockStore({
@@ -74,6 +76,7 @@ describe('List Component', () => {
   });
 });
 
+// Provided that the API has errored
 describe('List Component', () => {
   test('Matches the snapshot errored', () => {
     const store = mockStore({
@@ -89,6 +92,7 @@ describe('List Component', () => {
   });
 });
 
+// Provided that the API has returned proper data
 describe('List Component', () => {
   test('Matches the snapshot no data', () => {
     const store = mockStore({
